@@ -1,5 +1,5 @@
 import React from 'react';
-import makeRequest from "../../App/request";
+import { makeGetRequest } from "../../App/request";
 import validateInput from "../../App/Validations/login";
 import TextFieldGroup from "../common/TextFieldGroup";
 import { Form, Button } from 'react-bootstrap';
@@ -31,21 +31,17 @@ class LogInForm extends React.Component {
     onSubmit(e) {
         e.preventDefault();
         if (this.isValid()) {
-            if (true) {
-                this.redirectAlert();
-            }
-            else {
-                this.setState({ errors: {}, isLoading: true });
-                makeRequest("rest/user/get", {
-                    userName: this.state.username,
-                    password: this.state.password
-                }).then(
-                    () => {
+            this.setState({ errors: {}, isLoading: true });
+            makeGetRequest("rest/user/" + this.state.username).then(
+                response => {
+                    if (response.password === this.state.password) {
                         this.redirectAlert();
-                    },
-                    ({ data }) => this.setState({ errors: data, isLoading: false })
-                );
-            }
+                    }
+                    else (
+                        this.setState({ errors: { password: 'Bad credentials' }, isLoading: false })
+                    )
+                }
+            );
         }
     }
 
@@ -73,7 +69,7 @@ class LogInForm extends React.Component {
     setSession() {
         sessionStorage.setItem('username', this.state.username)
         sessionStorage.setItem('auth', true)
-        browserHistory.push('/')
+        browserHistory.push('/dashboard')
     }
 
     render() {

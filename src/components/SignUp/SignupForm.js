@@ -1,5 +1,5 @@
 import React from 'react';
-import makeRequest from "../../App/request";
+import { makePostRequest } from "../../App/request";
 import validateInput from "../../App/Validations/signup";
 import TextFieldGroup from "../common/TextFieldGroup";
 import { Form, Button } from 'react-bootstrap';
@@ -33,7 +33,7 @@ class SignupForm extends React.Component {
         e.preventDefault();
         if (this.isValid()) {
             this.setState({ errors: {}, isLoading: true });
-            makeRequest("rest/user/add", {
+            makePostRequest("rest/user/add", {
                 userName: this.state.username,
                 email: this.state.email,
                 password: this.state.password
