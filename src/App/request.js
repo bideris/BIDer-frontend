@@ -13,6 +13,17 @@ const makePostRequest = (url, data) => {
     });
 }
 
+/*const makePostRequest = async (url, data) => {
+    try {
+        const data = await axios.post(url, data);
+        if (data.status == 200) {
+            return data.data
+        }
+    } catch (err) {
+        return null;
+    }
+}*/
+
 const makeGetRequest = (url) => {
     return axios.get(apiUrl + url).then(data => {
         if (data.status === 200)
