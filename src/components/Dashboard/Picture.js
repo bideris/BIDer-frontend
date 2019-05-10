@@ -40,6 +40,11 @@ class Picture extends React.Component {
           src={this.state.imgList[this.state.index]}
           onClick={this.onImageClick}
         />
+        <center>
+          <p>
+            <i>{this.props.info}</i>
+          </p>
+        </center>
       </div>
     );
   }

@@ -1,14 +1,14 @@
 import React from "react";
 import { Jumbotron, Container, Button } from "react-bootstrap";
 import Picture from "./Picture.js";
-import { users } from "../../mock_data/images.js";
+import users from "../../mock_data/images.js";
 
 class Dashboard extends React.Component {
   constructor() {
     super();
     this.state = {
       index: 0,
-      users: users //<---- Mock Data
+      users: users.users //<---- Mock Data
     };
     this.onRatingClick = this.onRatingClick.bind(this);
   }
@@ -29,7 +29,11 @@ class Dashboard extends React.Component {
     return (
       <Jumbotron>
         <Container fluid>
-          <Picture imgPaths={this.state.users[this.state.index].imgPaths} />
+          <h1>here are some lithuanian beauties for ya</h1>
+          <Picture
+            imgPaths={this.state.users[this.state.index].imgPaths}
+            info={this.state.users[this.state.index].info}
+          />
           <center>
             <Button
               variant="outline-success"

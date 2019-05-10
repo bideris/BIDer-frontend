@@ -6,7 +6,7 @@ function DisplayImage(props) {
     <div>
       <Container fluid>
         <center>
-          <Image src={props.src} onClick={props.onClick} rounded fluid />
+          <Image src={props.src} onClick={props.onClick} thumbnail rounded />
         </center>
       </Container>
     </div>

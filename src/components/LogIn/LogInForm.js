@@ -34,6 +34,7 @@ class LogInForm extends React.Component {
       this.setState({ errors: {}, isLoading: true });
       makeGetRequest("rest/user/" + this.state.username).then(response => {
         if (/*response.password === this.state.password*/ true) {
+          //mocked login
           this.redirectAlert();
         } else
           this.setState({

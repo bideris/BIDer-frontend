@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router";
 import { Navbar, Nav, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import Logout from "../App/Logout";
+import Logout from "../../App/Logout";
 
 export default () => {
   const isLoggedIn = sessionStorage.getItem("auth");
@@ -13,6 +13,27 @@ export default () => {
         <Nav.Link href="#">
           <Button variant="outline-light" block>
             Dashboard
+          </Button>
+        </Nav.Link>
+      </LinkContainer>
+      <LinkContainer to="/UsersWhoRented">
+        <Nav.Link href="#">
+          <Button variant="outline-light" block>
+            Users Who Rented
+          </Button>
+        </Nav.Link>
+      </LinkContainer>
+      <LinkContainer to="/myposts">
+        <Nav.Link href="#">
+          <Button variant="outline-light" block>
+            My Posts
+          </Button>
+        </Nav.Link>
+      </LinkContainer>
+      <LinkContainer to="/myauctions">
+        <Nav.Link href="#">
+          <Button variant="outline-light" block>
+            My Auctions
           </Button>
         </Nav.Link>
       </LinkContainer>
