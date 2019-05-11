@@ -1,31 +1,26 @@
 import React from "react";
 import { Table, Jumbotron, Container } from "react-bootstrap";
 import users from "../../mock_data/images.js";
-import SingleAuctionLine from "./SingleAuctionLine";
-import SweetAlert from "react-bootstrap-sweetalert";
-
-class MyAuctions extends React.Component {
-  constructor() {
-    super();
+import SingleActiveAuctionLine from "./SingleActiveAuctionLine";
+import { browserHistory } from "react-router";
+class ActiveAuctions extends React.Component {
+  constructor(props) {
+    super(props);
     this.state = {
-      users: users.myAuctions, //<---- Mock Data
+      users: users.activeAuctions, //<---- Mock Data
       alert: null
     };
+    this.handleParticipate = this.handleParticipate.bind(this);
   }
 
-  handleAccept = id => {
-    console.log("Accept:" + id);
-    const getAlert = () => (
-      <SweetAlert
-        success
-        title="Accepted!"
-        onConfirm={() => {
-          this.setState({ alert: null });
-        }}
-      />
-    );
-    this.setState({
-      alert: getAlert()
+  handleParticipate = id => {
+    //Handle participate - launch chat/bid page
+    console.log("Participate:" + id);
+    browserHistory.push({
+      pathname: "/activeauction",
+      state: {
+        id: id
+      }
     });
   };
 
@@ -34,20 +29,21 @@ class MyAuctions extends React.Component {
       <Jumbotron>
         <Container fluid>
           <center>
-            <h1>Actions, which have ended and in which you participated</h1>
+            <h1>Active auctions</h1>
           </center>
           <Table responsive striped hover>
             <tbody>
               {this.state.users.map((item, index) => {
                 return (
-                  <SingleAuctionLine
+                  <SingleActiveAuctionLine
                     key={index}
                     index={index}
                     name={item.name}
                     house={item.house}
                     sum={item.sum}
-                    status={item.status}
-                    accept={this.handleAccept}
+                    startDate={item.startDate}
+                    bidStarted={item.bidStarted}
+                    participate={this.handleParticipate}
                   />
                 );
               })}
@@ -60,4 +56,4 @@ class MyAuctions extends React.Component {
   }
 }
 
-export default MyAuctions;
+export default ActiveAuctions;

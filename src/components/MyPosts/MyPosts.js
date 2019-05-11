@@ -1,7 +1,6 @@
 import React from "react";
 import { Table, Jumbotron, Container } from "react-bootstrap";
 import users from "../../mock_data/images.js";
-import Post from "./Post";
 import Picture from "../Dashboard/Picture";
 import NewPostFormModal from "./NewPostFormModal";
 

@@ -37,6 +37,13 @@ export default () => {
           </Button>
         </Nav.Link>
       </LinkContainer>
+      <LinkContainer to="/activeauctions">
+        <Nav.Link href="#">
+          <Button variant="outline-light" block>
+            Active auctions
+          </Button>
+        </Nav.Link>
+      </LinkContainer>
       <LinkContainer to="/">
         <Nav.Link href="#">
           <Button variant="outline-light" onClick={Logout} block>

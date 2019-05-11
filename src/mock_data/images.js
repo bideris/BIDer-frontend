@@ -108,4 +108,68 @@ const myAuctions = [
     status: "NO"
   }
 ];
-export default { users, usersRented, myPosts, myAuctions };
+const activeAuctions = [
+  {
+    id: 0,
+    name: "Good hata",
+    house: "houseName",
+    sum: 500000,
+    startDate: "2019-05-11 01:21",
+    bidStarted: true
+  },
+  {
+    id: 0,
+    name: "Good hata1",
+    house: "houseName1",
+    sum: 400000,
+    startDate: "2019-06-11 01:00",
+    bidStarted: false
+  },
+  {
+    id: 0,
+    name: "Good hata2",
+    house: "houseName2",
+    sum: 200000,
+    startDate: "2019-06-11 01:00",
+    bidStarted: true
+  },
+  {
+    id: 0,
+    name: "Good hata3",
+    house: "houseName3",
+    sum: 100000,
+    startDate: "2019-06-11 01:00",
+    bidStarted: false
+  }
+];
+
+const bids = [
+  {
+    name: "Dzinsofke",
+    sum: 500,
+    bidTime: "05:11"
+  },
+  {
+    name: "Masofke",
+    sum: 800,
+    bidTime: "07:11"
+  },
+  {
+    name: "Krasavka",
+    sum: 900,
+    bidTime: "05:41"
+  },
+  {
+    name: "Matofke",
+    sum: 1000,
+    bidTime: "01:11"
+  }
+];
+export default {
+  users,
+  usersRented,
+  myPosts,
+  myAuctions,
+  activeAuctions,
+  bids
+};
