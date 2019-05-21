@@ -2,23 +2,28 @@ import React from "react";
 import { Alert, Button } from "react-bootstrap";
 
 function SingleAuctionLine(props) {
+  let disable = !props.isWinner || props.status === "Done" ? true : false;
   return (
     <tr>
-      <th>{props.name}</th>
-      <th>{props.house}</th>
-      <th>{props.status}</th>
-      <th>
-        {props.status === "YES" ? (
+      <td>{props.name}</td>
+      <td>{props.house}</td>
+      <td>{props.status}</td>
+      <td>
+        {props.isWinner ? (
           <Alert variant="success">SUCCESS</Alert>
         ) : (
           <Alert variant="danger">FAILURE</Alert>
         )}
-      </th>
-      <th>
-        <Button variant="success" onClick={() => props.accept(props.index)}>
+      </td>
+      <td>
+        <Button
+          disabled={disable}
+          variant="success"
+          onClick={() => props.accept(props.index)}
+        >
           Accept
         </Button>
-      </th>
+      </td>
     </tr>
   );
 }

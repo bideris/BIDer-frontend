@@ -8,11 +8,23 @@ class NewPostFormModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      show: false,
       //FORM CREDENTIALS
-      house: "",
-      address: "",
+      price: 0,
+      name: "",
+      about: "",
+      country: "",
+      city: "",
+      houseNumber: 0,
+      apartmentNumber: 0,
+      area: 0,
+      rooms: 0,
+      floor: 0,
+      floorCount: 0,
+      builtYear: "",
+      startDate: "",
+      duration: 0,
       imgPaths: "",
+      show: false,
       pictures: [],
       picturesURL: [],
       alert: null
@@ -33,10 +45,22 @@ class NewPostFormModal extends React.Component {
 
   handleClose() {
     this.setState({
-      show: false,
-      house: "",
-      address: "",
+      price: 0,
+      name: "",
+      about: "",
+      country: "",
+      city: "",
+      houseNumber: 0,
+      apartmentNumber: 0,
+      area: 0,
+      rooms: 0,
+      floor: 0,
+      floorCount: 0,
+      builtYear: "",
+      startDate: "",
+      duration: 0,
       imgPaths: "",
+      show: false,
       pictures: [],
       picturesURL: [],
       alert: null
@@ -44,11 +68,26 @@ class NewPostFormModal extends React.Component {
   }
 
   handleSubmit() {
-    this.props.onSubmit(
-      this.state.house,
-      this.state.address,
-      this.state.picturesURL
-    );
+    let data = {
+      price: this.state.price,
+      name: this.state.name,
+      about: this.state.about,
+      country: this.state.country,
+      city: this.state.city,
+      apartmentNumber: this.state.apartmentNumber,
+      houseNumber: this.state.houseNumber,
+      area: this.state.area,
+      rooms: this.state.rooms,
+      floor: this.state.floor,
+      floorCount: this.state.floorCount,
+      builtYear: this.state.builtYear,
+      startDate: this.state.startDate,
+      duration: this.state.duration,
+      imgPaths: this.state.imgPaths,
+      pictures: this.state.pictures,
+      picturesURL: this.state.picturesURL
+    };
+    this.props.onSubmit(data);
     const getAlert = () => (
       <SweetAlert
         success
@@ -61,8 +100,21 @@ class NewPostFormModal extends React.Component {
     this.setState({
       alert: getAlert(),
       show: false,
-      house: "",
-      address: "",
+      //FORM CREDENTIALS
+      price: 0,
+      name: "",
+      about: "",
+      country: "",
+      city: "",
+      houseNumber: 0,
+      apartmentNumber: 0,
+      area: 0,
+      rooms: 0,
+      floor: 0,
+      floorCount: 0,
+      builtYear: "",
+      startDate: "",
+      duration: 0,
       imgPaths: ""
     });
   }
@@ -87,16 +139,98 @@ class NewPostFormModal extends React.Component {
           </Modal.Header>
           <Form>
             <TextFieldGroup
-              label="House"
+              label="Price"
               onChange={this.onChange}
-              value={this.state.house}
-              field="house"
+              value={this.state.price}
+              field="price"
+              type="number"
             />
             <TextFieldGroup
-              label="Address"
+              label="Name"
               onChange={this.onChange}
-              value={this.state.address}
-              field="address"
+              value={this.state.name}
+              field="name"
+            />
+            <TextFieldGroup
+              label="About"
+              onChange={this.onChange}
+              value={this.state.about}
+              field="about"
+            />
+            <TextFieldGroup
+              label="Country"
+              onChange={this.onChange}
+              value={this.state.country}
+              field="country"
+            />
+            <TextFieldGroup
+              label="City"
+              onChange={this.onChange}
+              value={this.state.city}
+              field="city"
+            />
+            <TextFieldGroup
+              label="HouseNumber"
+              onChange={this.onChange}
+              value={this.state.houseNumber}
+              field="houseNumber"
+              type="number"
+            />
+            <TextFieldGroup
+              label="ApartmentNumber"
+              onChange={this.onChange}
+              value={this.state.apartmentNumber}
+              field="apartmentNumber"
+              type="number"
+            />
+            <TextFieldGroup
+              label="Area"
+              onChange={this.onChange}
+              value={this.state.area}
+              field="area"
+              type="number"
+            />
+            <TextFieldGroup
+              label="Rooms"
+              onChange={this.onChange}
+              value={this.state.rooms}
+              field="rooms"
+              type="number"
+            />
+            <TextFieldGroup
+              label="Floor"
+              onChange={this.onChange}
+              value={this.state.floor}
+              field="floor"
+              type="number"
+            />
+            <TextFieldGroup
+              label="FloorCount"
+              onChange={this.onChange}
+              value={this.state.floorCount}
+              field="floorCount"
+              type="number"
+            />
+            <TextFieldGroup
+              label="BuiltYear"
+              onChange={this.onChange}
+              value={this.state.builtYear}
+              field="builtYear"
+              type="date"
+            />
+            <TextFieldGroup
+              label="StartDate"
+              onChange={this.onChange}
+              value={this.state.startDate}
+              field="startDate"
+              type="date"
+            />
+            <TextFieldGroup
+              label="Duration"
+              onChange={this.onChange}
+              value={this.state.duration}
+              field="duration"
+              type="number"
             />
           </Form>
           <Container>

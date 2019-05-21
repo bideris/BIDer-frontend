@@ -80,16 +80,7 @@ export default () => {
       </Link>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
-        <Nav className="ml-auto">
-          {isLoggedIn ? userLinks : guestLinks}
-          <LinkContainer to="/About">
-            <Nav.Link href="#">
-              <Button variant="outline-light" block>
-                About
-              </Button>
-            </Nav.Link>
-          </LinkContainer>
-        </Nav>
+        <Nav className="ml-auto">{isLoggedIn ? userLinks : guestLinks}</Nav>
       </Navbar.Collapse>
     </Navbar>
   );

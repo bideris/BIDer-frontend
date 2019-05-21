@@ -1,6 +1,8 @@
 import React from "react";
 import { Button, Form, Table } from "react-bootstrap";
 import TextFieldGroup from "../common/TextFieldGroup";
+import { makePostRequest } from "../../App/request";
+
 class MyAuctions extends React.Component {
   constructor(props) {
     super(props);
@@ -13,7 +15,13 @@ class MyAuctions extends React.Component {
   }
 
   handleSubmit() {
-    console.log(this.state.bid);
+    makePostRequest("auction/bid/add", {
+      sum: this.state.bid,
+      userFk: sessionStorage.userID,
+      auctionFk: this.props.id
+    }).then(() => {
+      this.props.update();
+    });
     this.setState({
       bid: ""
     });
@@ -30,13 +38,18 @@ class MyAuctions extends React.Component {
           <h1>BIDS</h1>
         </center>
         <Table responsive striped hover>
+          <thead>
+            <tr>
+              <th>Sum</th>
+              <th>Date</th>
+            </tr>
+          </thead>
           <tbody>
             {this.props.bids.map((item, index) => {
               return (
                 <tr key={index}>
-                  <th>{item.name}</th>
-                  <th>{item.sum}</th>
-                  <th>{item.bidTime}</th>
+                  <td>{item.sum}</td>
+                  <td>{item.date}</td>
                 </tr>
               );
             })}
@@ -46,9 +59,10 @@ class MyAuctions extends React.Component {
           <TextFieldGroup
             onChange={this.onChange}
             value={this.state.bid}
-            label=""
+            label="Enter your bid here.."
             placeholder="BID"
             field="bid"
+            type="number"
           />
           <Button block variant="danger" onClick={this.handleSubmit}>
             BID

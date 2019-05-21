@@ -1,6 +1,8 @@
 import React from "react";
 import { Button, Form, Table } from "react-bootstrap";
 import TextFieldGroup from "../common/TextFieldGroup";
+import { makePostRequest } from "../../App/request";
+
 class MyAuctions extends React.Component {
   constructor() {
     super();
@@ -13,7 +15,13 @@ class MyAuctions extends React.Component {
   }
 
   handleSubmit() {
-    console.log(this.state.message);
+    makePostRequest("auction/message/add", {
+      text: this.state.message,
+      userFk: sessionStorage.userID,
+      auctionFk: this.props.id
+    }).then(() => {
+      this.props.update();
+    });
     this.setState({
       message: ""
     });
@@ -30,13 +38,20 @@ class MyAuctions extends React.Component {
           <h1>MESSAGES</h1>
         </center>
         <Table responsive striped hover>
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Message</th>
+              <th>Date</th>
+            </tr>
+          </thead>
           <tbody>
             {this.props.msgs.map((item, index) => {
               return (
                 <tr key={index}>
-                  <th>{item.name}</th>
-                  <th>{item.sum}</th>
-                  <th>{item.bidTime}</th>
+                  <th>{item.user.userName}</th>
+                  <th>{item.text}</th>
+                  <th>{item.date}</th>
                 </tr>
               );
             })}
@@ -46,7 +61,7 @@ class MyAuctions extends React.Component {
           <TextFieldGroup
             onChange={this.onChange}
             value={this.state.message}
-            label=""
+            label="Enter your message here.."
             placeholder="Message"
             field="message"
           />

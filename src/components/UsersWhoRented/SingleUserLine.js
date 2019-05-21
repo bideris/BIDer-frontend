@@ -5,17 +5,17 @@ import ReviewModal from "../common/ReviewModal";
 function SingleUserLine(props) {
   return (
     <tr>
-      <th>
+      <td>
         {props.name} {props.surname}
-      </th>
-      <th>{props.house}</th>
-      <th>{props.address}</th>
-      <th>
+      </td>
+      <td>{props.house}</td>
+      <td>{props.address}</td>
+      <td>
         <Button variant="danger" onClick={() => props.delete(props.index)}>
           Delete
         </Button>
-        <ReviewModal id={props.index} wrResponse={props.wrResponse} />
-      </th>
+        <ReviewModal id={props.userID} wrResponse={props.wrResponse} />
+      </td>
     </tr>
   );
 }

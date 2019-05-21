@@ -3,23 +3,25 @@ import { Button } from "react-bootstrap";
 import DateCountdown from "react-date-countdown-timer";
 
 function SingleActiveAuctionLine(props) {
+  let bidStarted = false; //props.status === "Started" ? true : false;
+  console.log(props);
   return (
     <tr>
-      <th>{props.name}</th>
-      <th>{props.house}</th>
-      <th>{props.sum}</th>
-      <th>
+      <td>{props.name}</td>
+      <td>{props.house}</td>
+      <td>{props.sum}</td>
+      <td>
         <DateCountdown dateTo={props.startDate} />
-      </th>
-      <th>
+      </td>
+      <td>
         <Button
-          disabled={props.bidStarted}
+          disabled={bidStarted}
           variant="success"
-          onClick={() => props.participate(props.index)}
+          onClick={() => props.participate(props.index, props.startDate)}
         >
           Participate
         </Button>
-      </th>
+      </td>
     </tr>
   );
 }

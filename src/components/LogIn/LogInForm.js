@@ -14,7 +14,8 @@ class LogInForm extends React.Component {
       password: "",
       errors: {},
       isLoading: false,
-      alert: null
+      alert: null,
+      user: {}
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -32,9 +33,15 @@ class LogInForm extends React.Component {
     e.preventDefault();
     if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true });
-      makeGetRequest("rest/user/" + this.state.username).then(response => {
-        if (/*response.password === this.state.password*/ true) {
-          //mocked login
+      makeGetRequest("user/" + this.state.username).then(response => {
+        if (
+          response.status.status === 0 &&
+          response.user.password === this.state.password
+        ) {
+          console.log(response.user);
+          this.setState({
+            userID: response.user.id
+          });
           this.redirectAlert();
         } else
           this.setState({
@@ -68,6 +75,7 @@ class LogInForm extends React.Component {
 
   setSession() {
     sessionStorage.setItem("username", this.state.username);
+    sessionStorage.setItem("userID", this.state.userID);
     sessionStorage.setItem("auth", true);
     browserHistory.push("/dashboard");
   }

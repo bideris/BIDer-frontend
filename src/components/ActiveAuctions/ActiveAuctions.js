@@ -1,25 +1,36 @@
 import React from "react";
 import { Table, Jumbotron, Container } from "react-bootstrap";
-import users from "../../mock_data/images.js";
 import SingleActiveAuctionLine from "./SingleActiveAuctionLine";
 import { browserHistory } from "react-router";
+import { makeGetRequest } from "../../App/request";
+
 class ActiveAuctions extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: users.activeAuctions, //<---- Mock Data
+      users: [],
       alert: null
     };
     this.handleParticipate = this.handleParticipate.bind(this);
   }
 
-  handleParticipate = id => {
+  componentDidMount() {
+    makeGetRequest("auction/user/" + sessionStorage.userID).then(response => {
+      console.log(response);
+      this.setState({
+        users: response
+      });
+    });
+  }
+
+  handleParticipate = (id, date) => {
     //Handle participate - launch chat/bid page
     console.log("Participate:" + id);
     browserHistory.push({
       pathname: "/activeauction",
       state: {
-        id: id
+        id: id,
+        date: date
       }
     });
   };
@@ -32,17 +43,32 @@ class ActiveAuctions extends React.Component {
             <h1>Active auctions</h1>
           </center>
           <Table responsive striped hover>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Place</th>
+                <th>Price</th>
+                <th>Time left to start</th>
+                <th />
+              </tr>
+            </thead>
             <tbody>
               {this.state.users.map((item, index) => {
                 return (
                   <SingleActiveAuctionLine
                     key={index}
-                    index={index}
-                    name={item.name}
-                    house={item.house}
-                    sum={item.sum}
+                    index={item.id}
+                    name={item.post.name}
+                    house={
+                      item.post.country +
+                      ", " +
+                      item.post.city +
+                      ", " +
+                      item.post.houseNumber
+                    }
+                    sum={item.post.price}
                     startDate={item.startDate}
-                    bidStarted={item.bidStarted}
+                    bidStarted={item.status}
                     participate={this.handleParticipate}
                   />
                 );

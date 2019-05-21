@@ -1,20 +1,30 @@
 import React from "react";
 import { Table, Jumbotron, Container } from "react-bootstrap";
-import users from "../../mock_data/images.js";
 import SingleUserLine from "./SingleUserLine";
 import SweetAlert from "react-bootstrap-sweetalert";
+import { makePostRequest, makeGetRequest } from "../../App/request";
 
 class Users extends React.Component {
   constructor() {
     super();
     this.state = {
-      users: users.usersRented, //<---- Mock Data
+      users: [],
       alert: null
     };
   }
 
+  componentDidMount() {
+    makeGetRequest("apartment/winners/" + sessionStorage.userID).then(
+      response => {
+        this.setState({
+          users: response
+        });
+      }
+    );
+  }
+
   handleDelete = id => {
-    console.log("Delete:" + id);
+    makeGetRequest("landlord/deleteWinner/" + id).then();
     const getAlert = () => (
       <SweetAlert
         warning
@@ -30,7 +40,10 @@ class Users extends React.Component {
   };
 
   wrResponse = (id, response) => {
-    console.log("Write response for " + id + ", the response is : " + response);
+    makePostRequest("user/writeReview/" + id, {
+      rate: 5,
+      feedback: response
+    }).then();
   };
 
   render() {
@@ -41,16 +54,30 @@ class Users extends React.Component {
             <h1>Users, who rented your chatas</h1>
           </center>
           <Table responsive striped hover>
+            <thead>
+              <tr>
+                <th>User name</th>
+                <th>House name</th>
+                <th>Adress</th>
+              </tr>
+            </thead>
             <tbody>
               {this.state.users.map((item, index) => {
                 return (
                   <SingleUserLine
                     key={index}
-                    index={index}
-                    name={item.name}
-                    surname={item.surname}
-                    house={item.house}
-                    address={item.address}
+                    index={item.id}
+                    userID={item.winner.id}
+                    name={item.winner.firstName}
+                    surname={item.winner.lastName}
+                    house={item.post.name}
+                    address={
+                      item.post.country +
+                      ", " +
+                      item.post.city +
+                      ", " +
+                      item.post.houseNumber
+                    }
                     delete={this.handleDelete}
                     wrResponse={this.wrResponse}
                   />

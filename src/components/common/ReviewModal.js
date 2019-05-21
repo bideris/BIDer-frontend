@@ -18,7 +18,7 @@ class ReviewModal extends React.Component {
   }
 
   handleSubmit() {
-    this.props.wrResponse(this.props.id, this.state.value);
+    this.props.wrResponse(this.props.userID, this.state.value);
     this.handleClose();
   }
 
