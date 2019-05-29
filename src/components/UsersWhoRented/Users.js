@@ -37,13 +37,17 @@ class Users extends React.Component {
     this.setState({
       alert: getAlert()
     });
+    window.location.reload();
   };
 
-  wrResponse = (id, response) => {
-    makePostRequest("user/writeReview/" + id, {
-      rate: 5,
-      feedback: response
-    }).then();
+  wrResponse = (id, response, rate) => {
+    makePostRequest(
+      "landlord/writeReview/" + sessionStorage.userID + "/" + id,
+      {
+        rate: rate,
+        feedback: response
+      }
+    ).then(window.location.reload());
   };
 
   render() {

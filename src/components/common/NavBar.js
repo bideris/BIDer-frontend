@@ -75,9 +75,17 @@ export default () => {
 
   return (
     <Navbar fixed="top" collapseOnSelect expand="lg" bg="danger" variant="dark">
-      <Link to="/">
-        <Navbar.Brand>BIDERIS</Navbar.Brand>
-      </Link>
+      <Navbar.Brand>
+        <Link to="/">
+          <img
+            alt=""
+            src="/Images/logo.png"
+            width="100"
+            height="100"
+            className="d-inline-block align-top"
+          />
+        </Link>
+      </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="ml-auto">{isLoggedIn ? userLinks : guestLinks}</Nav>

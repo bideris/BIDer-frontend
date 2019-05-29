@@ -42,6 +42,7 @@ class MyAuctions extends React.Component {
             <tr>
               <th>Sum</th>
               <th>Date</th>
+              <th>Username</th>
             </tr>
           </thead>
           <tbody>
@@ -50,6 +51,7 @@ class MyAuctions extends React.Component {
                 <tr key={index}>
                   <td>{item.sum}</td>
                   <td>{item.date}</td>
+                  <td>{item.user.userName}</td>
                 </tr>
               );
             })}

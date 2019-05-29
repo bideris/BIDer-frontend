@@ -24,7 +24,6 @@ class ActiveAuctions extends React.Component {
   }
 
   handleParticipate = (id, date) => {
-    //Handle participate - launch chat/bid page
     console.log("Participate:" + id);
     browserHistory.push({
       pathname: "/activeauction",

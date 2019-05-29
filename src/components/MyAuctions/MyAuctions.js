@@ -2,7 +2,7 @@ import React from "react";
 import { Table, Jumbotron, Container } from "react-bootstrap";
 import SingleAuctionLine from "./SingleAuctionLine";
 import SweetAlert from "react-bootstrap-sweetalert";
-import { makeGetRequest } from "../../App/request";
+import { makePostRequest, makeGetRequest } from "../../App/request";
 
 class MyAuctions extends React.Component {
   constructor() {
@@ -23,13 +23,9 @@ class MyAuctions extends React.Component {
 
   handleAccept = id => {
     console.log("Accept:" + id);
-    makeGetRequest("auction/accept/" + sessionStorage.userID + "/" + id).then(
-      response => {
-        this.setState({
-          users: response
-        });
-      }
-    );
+    makePostRequest(
+      "auction/accept/" + sessionStorage.userID + "/" + id
+    ).then();
     const getAlert = () => (
       <SweetAlert
         success
@@ -42,6 +38,7 @@ class MyAuctions extends React.Component {
     this.setState({
       alert: getAlert()
     });
+    window.location.reload();
   };
 
   render() {
@@ -66,13 +63,17 @@ class MyAuctions extends React.Component {
                   <SingleAuctionLine
                     key={index}
                     index={item.id}
-                    name={item.name}
+                    name={item.post.name}
                     house={
-                      item.country + ", " + item.city + ", " + item.houseNumber
+                      item.post.country +
+                      ", " +
+                      item.post.city +
+                      ", " +
+                      item.post.houseNumber
                     }
-                    sum={item.price}
+                    sum={item.post.price}
                     isWinner={
-                      sessionStorage.user === item.winner.userName
+                      sessionStorage.username === item.winner.userName
                         ? true
                         : false
                     }

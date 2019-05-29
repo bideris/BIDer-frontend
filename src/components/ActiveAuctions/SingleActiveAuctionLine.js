@@ -3,7 +3,8 @@ import { Button } from "react-bootstrap";
 import DateCountdown from "react-date-countdown-timer";
 
 function SingleActiveAuctionLine(props) {
-  let bidStarted = false; //props.status === "Started" ? true : false;
+  console.log(props);
+  let bidStarted = props.bidStarted !== "Started" ? true : false;
   console.log(props);
   return (
     <tr>
